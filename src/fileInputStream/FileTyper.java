@@ -1,4 +1,4 @@
-package fileStreams;
+package fileInputStream;
 
 import java.io.*;
 

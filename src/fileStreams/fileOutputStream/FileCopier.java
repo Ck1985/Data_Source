@@ -1,6 +1,6 @@
-package fileOutputStream;
+package fileStreams.fileOutputStream;
 
-import fileInputStream.*;
+import fileStreams.fileInputStream.*;
 import java.io.IOException;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;

@@ -1,7 +1,7 @@
-package fileViewer_Part1;
+package fileStreams.fileViewer_Part1;
 
 import java.io.*;
-import fileInputStream.*;
+import fileStreams.fileInputStream.*;
 
 /**
  * Created by anonymous.vn1985@gmail.com
@@ -86,6 +86,7 @@ public class FileDumper {
                          System.out.print("0" + Integer.toHexString(hex) + " ");
                     }
                 }
+                System.out.println();
             }
         } finally {
             if (fis != null) {
@@ -94,6 +95,40 @@ public class FileDumper {
         }
     }
     public static void main(String[] args) {
-
+        if (args.length < 2) {
+            System.out.println("Usage: Please, input the command follow this form: \n" +
+                               "java FileDumper [-adh] file1 file2 ....");
+            return;
+        }
+        int firstArg = 0;
+        int mode = ASC;
+        if (args[0].startsWith("-")) {
+            firstArg = 1;
+            if (args[0].equals("-d")) {
+                mode = DEC;
+            } else if (args[0].equals("-h")) {
+                mode = HEX;
+            }
+        } else {
+            System.out.println("Usage: Please, input the command follow this form: \n" +
+                    "java FileDumper [-adh] file1 file2 ....");
+            return;
+        }
+        for (int i = firstArg; i < args.length; i++) {
+            try {
+                if (mode == ASC) {
+                    dumpAscii(args[i]);
+                } else if (mode == DEC) {
+                    dumpDecimal(args[i]);
+                } else {
+                    dumpHex(args[i]);
+                }
+            } catch (IOException e) {
+                System.err.println("Couldn't read from " + args[i] + "e.getMessage(): " + e.getMessage());
+            }
+            if (i < args.length - 1) {
+                System.out.println("\r\n--------------------------------------\r\n");
+            }
+        }
     }
 }

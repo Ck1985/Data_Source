@@ -45,6 +45,6 @@ public class WriteDataOnURLConnection {
     }
     public static void main(String[] args) {
         MailClient mail = new MailClient();
-        mail.writeToURLConnection("elharo@metalab.unc.edu");
+        mail.writeToURLConnection("anonymous.vn1985@gmail.com");
     }
 }

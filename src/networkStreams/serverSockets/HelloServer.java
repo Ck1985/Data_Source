@@ -11,10 +11,19 @@ public class HelloServer {
         int port = 2345;
         ServerSocket ss = new ServerSocket(port);
         while (true) {
-            Socket s = ss.accept();
-            String response = "Hello " + s.getInetAddress() + " on port " +
-                             s.getPort() + "\r\n";
-                   response +=
+            try {
+                Socket s = ss.accept();
+                String response = "Hello " + s.getInetAddress() + " on port " +
+                        s.getPort() + "\r\n";
+                response += "This is " + s.getLocalAddress() + " on port " +
+                        s.getLocalPort() + "\r\n";
+                OutputStream out = s.getOutputStream();
+                out.write(response.getBytes("US-ASCII"));
+                out.flush();
+                s.close();
+            } catch (IOException e) {
+                System.err.println();
+            }
         }
     }
 }
